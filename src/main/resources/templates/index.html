@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="fixed" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -33,6 +33,11 @@
 </head>
 
 <body>
+
+	<!-- Block externes -->
+	<!-- index modal pour inscription et connection client -->
+	<th:block th:include="defaultAssets/indexModal"></th:block>
+	
 
     <!-- 
         PRELOADER
@@ -79,24 +84,38 @@
                         <label for="top-search">search</label>
                     </form>
 
+					<!-- affichage des liens si session vide -->
                     <div class="btn-cols">
 
-                        <ul class="list-btn-group">
+                        <ul class="list-btn-group" th:if="${cltCo == null}">
                             <li>
-                                <a href="#" data-toggle="modal" data-target="#myModal">
-                                    Sing up
+                                <a href="/admin" >
+                                    <b>Administrer</b>
                                 </a>
                             </li>
                             <li>
-                                <a href="register-page.html">
-                                    <b>Sing in</b>
+                                <a href="#" data-toggle="modal" data-target="#inscriptionModal" >
+                                    S'inscrire
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#connectModal" >
+                                    <b>Se connecter</b>
                                 </a>
                             </li>
                         </ul>
-                    </div>
-                </div>
+					<!-- affichage des liens si client connecté -->
+                        <ul class="list-btn-group" th:if="${msgE == null && cltCo != null}">
+                            <li>
+                                <a href="logout">
+                                    <b>Se deconnecter</b>
+                                </a>
+                            </li>
+                        </ul>
+                	</div>
+                 </div>
 
-                <ul class="nav navbar-nav navbar-right info-panel">
+                <ul class="nav navbar-nav navbar-right info-panel" th:if="${cltCo != null}">
 
                     <!-- Profile -->
                     <li class="profile">
@@ -118,7 +137,7 @@
                             <!-- Info -->
                             <span class="info">
                                 <!-- Name -->
-                                <span class="name text-uppercase">John Doe</span>
+                                <span class="name text-uppercase" th:if="${cltCo != null}" th:utext="${cltCo}"></span>
                                 <a href="#">edit profile</a>
                             </span>
                         </span>
@@ -2781,7 +2800,7 @@
 
                 <div class="row hidden-xs">
                     <div class="col-xs-12 img-on-bg">
-                        <img src="images/blocks/parallax-bg-popular-on-shop.png" alt="">
+                        <img src="/frontAssets/images/blocks/parallax-bg-popular-on-shop.png" alt="">
                     </div>
                 </div>
 
@@ -3179,8 +3198,8 @@
 
                                         <!-- Image -->
                                         <div class="image">
-                                            <img class="hover" src="images/shop/img-01-1.jpg" alt="">
-                                            <img class="main" src="images/shop/img-01.jpg" alt="">
+                                            <img class="hover" src="/frontAssets/images/shop/img-01-1.jpg" alt="">
+                                            <img class="main" src="/frontAssets/images/shop/img-01.jpg" alt="">
                                         </div>
 
                                         <!-- Caption -->
@@ -3353,7 +3372,7 @@
 
                                         <!-- Image -->
                                         <div class="image">
-                                            <img class="main" src="images/shop/img-02.jpg" alt="">
+                                            <img class="main" src="/frontAssets/images/shop/img-02.jpg" alt="">
                                         </div>
 
                                         <!-- Caption -->
@@ -3526,8 +3545,8 @@
 
                                         <!-- Image -->
                                         <div class="image">
-                                            <img class="hover" src="images/shop/img-08-1.jpg" alt="">
-                                            <img class="main" src="images/shop/img-08.jpg" alt="">
+                                            <img class="hover" src="/frontAssets/images/shop/img-08-1.jpg" alt="">
+                                            <img class="main" src="/frontAssets/images/shop/img-08.jpg" alt="">
                                         </div>
 
                                         <!-- Caption -->
@@ -3700,7 +3719,7 @@
 
                                         <!-- Image -->
                                         <div class="image">
-                                            <img class="main" src="images/shop/img-09.jpg" alt="">
+                                            <img class="main" src="/frontAssets/images/shop/img-09.jpg" alt="">
                                         </div>
 
                                         <!-- Caption -->
@@ -3873,7 +3892,7 @@
 
                                         <!-- Image -->
                                         <div class="image">
-                                            <img class="main" src="images/shop/img-10.jpg" alt="">
+                                            <img class="main" src="/frontAssets/images/shop/img-10.jpg" alt="">
                                         </div>
 
                                         <!-- Caption -->
@@ -4046,7 +4065,7 @@
 
                                         <!-- Image -->
                                         <div class="image">
-                                            <img class="main" src="images/shop/img-11.jpg" alt="">
+                                            <img class="main" src="/frontAssets/images/shop/img-11.jpg" alt="">
                                         </div>
 
                                         <!-- Caption -->
@@ -4283,7 +4302,7 @@
             </div>
 
             <!-- Parallax block -->
-            <div class="parallax bg-grey-light opc-7" data-parallax-image="images/blocks/bg-02.jpg"
+            <div class="parallax bg-grey-light opc-7" data-parallax-image="/frontAssets/images/blocks/bg-02.jpg"
                 data-speed-direction="-.2"></div><!-- / Parallax block -->
         </div><!-- / Parallax wrapper -->
     </div>
@@ -4421,7 +4440,7 @@
 
                                     <!-- Image -->
                                     <div class="image">
-                                        <img src="images/blog/img-01.jpg" alt="">
+                                        <img src="/frontAssets/images/blog/img-01.jpg" alt="">
                                     </div>
 
                                     <!-- Caption -->
@@ -4483,7 +4502,7 @@
 
                                     <!-- Image -->
                                     <div class="image">
-                                        <img src="images/blog/img-02.jpg" alt="">
+                                        <img src="/frontAssets/images/blog/img-02.jpg" alt="">
                                     </div>
 
                                     <!-- Caption -->
@@ -4545,7 +4564,7 @@
 
                                     <!-- Image -->
                                     <div class="image">
-                                        <img src="images/blog/img-03.jpg" alt="">
+                                        <img src="/frontAssets/images/blog/img-03.jpg" alt="">
                                     </div>
 
                                     <!-- Caption -->
@@ -4607,7 +4626,7 @@
 
                                     <!-- Image -->
                                     <div class="image">
-                                        <img src="images/blog/img-04.jpg" alt="">
+                                        <img src="/frontAssets/images/blog/img-04.jpg" alt="">
                                     </div>
 
                                     <!-- Caption -->
@@ -4669,7 +4688,7 @@
 
                                     <!-- Image -->
                                     <div class="image">
-                                        <img src="images/blog/img-05.jpg" alt="">
+                                        <img src="/frontAssets/images/blog/img-05.jpg" alt="">
                                     </div>
 
                                     <!-- Caption -->
@@ -4731,7 +4750,7 @@
 
                                     <!-- Image -->
                                     <div class="image">
-                                        <img src="images/blog/img-06.jpg" alt="">
+                                        <img src="/frontAssets/images/blog/img-06.jpg" alt="">
                                     </div>
 
                                     <!-- Caption -->
@@ -4793,7 +4812,7 @@
 
                                     <!-- Image -->
                                     <div class="image">
-                                        <img src="images/blog/img-07.jpg" alt="">
+                                        <img src="/frontAssets/images/blog/img-07.jpg" alt="">
                                     </div>
 
                                     <!-- Caption -->
@@ -4953,35 +4972,35 @@
                     <!-- Item -->
                     <div class="img-item">
                         <div class="wrap">
-                            <img src="images/brands/img-2-01.png" alt="">
+                            <img src="/frontAssets/images/brands/img-2-01.png" alt="">
                         </div>
                     </div>
 
                     <!-- Item -->
                     <div class="img-item">
                         <div class="wrap">
-                            <img src="images/brands/img-2-02.png" alt="">
+                            <img src="/frontAssets/images/brands/img-2-02.png" alt="">
                         </div>
                     </div>
 
                     <!-- Item -->
                     <div class="img-item">
                         <div class="wrap">
-                            <img src="images/brands/img-2-03.png" alt="">
+                            <img src="/frontAssets/images/brands/img-2-03.png" alt="">
                         </div>
                     </div>
 
                     <!-- Item -->
                     <div class="img-item">
                         <div class="wrap">
-                            <img src="images/brands/img-2-04.png" alt="">
+                            <img src="/frontAssets/images/brands/img-2-04.png" alt="">
                         </div>
                     </div>
 
                     <!-- Item -->
                     <div class="img-item">
                         <div class="wrap">
-                            <img src="images/brands/img-2-05.png" alt="">
+                            <img src="/frontAssets/images/brands/img-2-05.png" alt="">
                         </div>
                     </div>
 
@@ -4995,14 +5014,14 @@
                     <!-- Item -->
                     <div class="img-item">
                         <div class="wrap">
-                            <img src="images/brands/img-2-07.png" alt="">
+                            <img src="/frontAssets/images/brands/img-2-07.png" alt="">
                         </div>
                     </div>
 
                     <!-- Item -->
                     <div class="img-item">
                         <div class="wrap">
-                            <img src="images/brands/img-2-08.png" alt="">
+                            <img src="/frontAssets/images/brands/img-2-08.png" alt="">
                         </div>
                     </div>
                 </div>
@@ -5123,7 +5142,7 @@
 
                                 <div class="col-md-6">
                                     <div class="footer-brand">
-                                        <img src="images/main-brand.png" alt="">
+                                        <img src="/frontAssets/images/main-brand.png" alt="">
                                     </div>
 
                                     <span class="comp-header st-12 text-uppercase">

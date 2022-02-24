@@ -1,0 +1,96 @@
+ <html lang="en" xmlns:th="http://www.thymeleaf.org">
+ <!-- Modal inscription start -->
+<div class="modal fade" id="inscriptionModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Inscription</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+        	<span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="post" action="getFormClient">
+          <div class="mb-3">
+            <label for="nom" class="col-form-label">Nom :</label>
+            <input type="text" class="form-control" id="nom" name="nom">
+          </div>
+          <div class="mb-3">
+            <label for="prenom" class="col-form-label">Prenom :</label>
+            <input type="text" class="form-control" id="prenom" name="prenom">
+          </div>
+          <div class="mb-3">
+            <label for="email" class="col-form-label">Email :</label>
+            <input type="email" class="form-control" id="email" name="email">
+          </div>
+          <div class="mb-3">
+            <label for="login" class="col-form-label">Login :</label>
+            <input type="text" class="form-control" id="login" name="login">
+          </div>
+          <div class="mb-3">
+            <label for="mdp" class="col-form-label">Password :</label>
+            <input type="password" class="form-control" id="mdp" name="mdp">
+          </div>
+          <div class="mb-3">
+            <label for="rue" class="col-form-label">Rue :</label>
+            <input type="text" class="form-control" id="rue" name="rue">
+          </div>
+          <div class="mb-3">
+            <label for="codeP" class="col-form-label">Code postal :</label>
+            <input type="text" class="form-control" id="codeP" name="codeP">
+          </div>
+          <div class="mb-3">
+            <label for="ville" class="col-form-label">Ville :</label>
+            <input type="text" class="form-control" id="ville" name="ville">
+          </div>
+          <div class="mb-3">
+            <label for="pays" class="col-form-label">Pays :</label>
+            <input type="text" class="form-control" id="pays" name="pays">
+          </div>
+          <div class="mb-3">
+            <label for="tel" class="col-form-label">Telephone :</label>
+            <input type="text" class="form-control" id="tel" name="tel">
+          </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+        <button type="submit" name="btnForm" value="btnIns"  class="btn btn-primary">S'inscrire</button>
+      </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+	<!-- Modal inscription end -->
+	
+	 <!-- Modal connexion start -->
+<div class="modal fade" id="connectModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Connexion</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+        	<span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="post" action="getFormClient">
+          <div class="mb-3">
+            <label for="email" class="col-form-label">Email :</label>
+            <input type="text" class="form-control" id="email" name="email">
+          </div>
+          <div class="mb-3">
+            <label for="mdp" class="col-form-label">Password :</label>
+            <input type="text" class="form-control" id="mdp" name="mdp">
+          </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+        <button type="submit" name="btnForm" value="btnCo" class="btn btn-primary">Se connecter</button>
+      </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+	<!-- Modal connexion end -->
+
+	
