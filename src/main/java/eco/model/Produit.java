@@ -13,7 +13,9 @@ public class Produit {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int id_prod;
-	String ref_prod, nom_prod,prix_unitaireHT, qye_stock, genre, couleur, taille, poids, infos_art;
+	String refProd, nomProd, genre, couleur, infosArt, photoProd;
+	Double prixUnitaireHT, poids;
+	int qteStock;
 	
 //	// Associations (relations)
 //	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE} ,
@@ -30,29 +32,17 @@ public class Produit {
 	public void setId_prod(int id_prod) {
 		this.id_prod = id_prod;
 	}
-	public String getRef_prod() {
-		return ref_prod;
+	public String getRefProd() {
+		return refProd;
 	}
-	public void setRef_prod(String ref_prod) {
-		this.ref_prod = ref_prod;
+	public void setRefProd(String refProd) {
+		this.refProd = refProd;
 	}
-	public String getNom_prod() {
-		return nom_prod;
+	public String getNomProd() {
+		return nomProd;
 	}
-	public void setNom_prod(String nom_prod) {
-		this.nom_prod = nom_prod;
-	}
-	public String getPrix_unitaireHT() {
-		return prix_unitaireHT;
-	}
-	public void setPrix_unitaireHT(String prix_unitaireHT) {
-		this.prix_unitaireHT = prix_unitaireHT;
-	}
-	public String getQye_stock() {
-		return qye_stock;
-	}
-	public void setQye_stock(String qye_stock) {
-		this.qye_stock = qye_stock;
+	public void setNomProd(String nomProd) {
+		this.nomProd = nomProd;
 	}
 	public String getGenre() {
 		return genre;
@@ -66,24 +56,40 @@ public class Produit {
 	public void setCouleur(String couleur) {
 		this.couleur = couleur;
 	}
-	public String getTaille() {
-		return taille;
+	public String getInfosArt() {
+		return infosArt;
 	}
-	public void setTaille(String taille) {
-		this.taille = taille;
+	public void setInfosArt(String infosArt) {
+		this.infosArt = infosArt;
 	}
-	public String getPoids() {
+	public String getPhotoProd() {
+		return photoProd;
+	}
+	public void setPhotoProd(String photoProd) {
+		this.photoProd = photoProd;
+	}
+	public Double getPrixUnitaireHT() {
+		return prixUnitaireHT;
+	}
+	public void setPrixUnitaireHT(Double prixUnitaireHT) {
+		this.prixUnitaireHT = prixUnitaireHT;
+	}
+	public Double getPoids() {
 		return poids;
 	}
-	public void setPoids(String poids) {
+	public void setPoids(Double poids) {
 		this.poids = poids;
 	}
-	public String getInfos_art() {
-		return infos_art;
+	public int getQteStock() {
+		return qteStock;
 	}
-	public void setInfos_art(String infos_art) {
-		this.infos_art = infos_art;
+	public void setQteStock(int qteStock) {
+		this.qteStock = qteStock;
 	}
+	
+	
+	
+	
 	
 //	public boolean add(Activite_sportive e) {
 //		return act_sport.add(e);

@@ -25,7 +25,7 @@ public class DefaultController {
 				m.addAttribute("idCltCo", idCltCo);
 				
 				// recupération et enregistrement des identifiants de connexion attribués à client pour la session
-				String cltCo = s.getAttribute("cltInfo").toString();
+				String cltCo = s.getAttribute("clt").toString();
 				m.addAttribute("cltCo", cltCo);
 				
 			}

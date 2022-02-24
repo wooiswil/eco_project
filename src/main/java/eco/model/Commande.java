@@ -14,6 +14,7 @@ public class Commande {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY )
 	int num_bon_commande;
+	int idClient;
 	Date date_commande, date_reglement;
 	String moyen_paiement, etat_cde, status_cde;
 	Double total_commande;
@@ -21,6 +22,7 @@ public class Commande {
 	
 	
 	// Accesseurs
+	
 	public int getNum_bon_commande() {
 		return num_bon_commande;
 	}
@@ -68,6 +70,12 @@ public class Commande {
 	}
 	public void setPaiement_valide(Boolean paiement_valide) {
 		this.paiement_valide = paiement_valide;
+	}
+	public int getIdClient() {
+		return idClient;
+	}
+	public void setIdClient(int idClient) {
+		this.idClient = idClient;
 	}
 	
 	

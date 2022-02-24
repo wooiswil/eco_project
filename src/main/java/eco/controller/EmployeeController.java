@@ -28,7 +28,7 @@ public class EmployeeController {
 	EmployeeImp empImp;
 	
 	// Variable static pour les dossiers photos (upload)
-		private static String empUpload = "src/main/resources/static/empUploads/";
+	private static String empUpload = "src/main/resources/static/empUploads/";
 		
 		// affiche la page d'inscription pour les employees
 		@RequestMapping(value = "/ajout", method = RequestMethod.GET)
@@ -60,7 +60,7 @@ public class EmployeeController {
 				
 				return "redirect:/Employee/ajout";
 			} else {
-				System.out.println("test1");
+				
 				if(empImp.verifByEmail(email) != null) {
 					System.out.println("test2");
 					rA.addFlashAttribute("msg", "L'email : "+ email + " exist deja");
@@ -92,20 +92,17 @@ public class EmployeeController {
 				// setter les valeurs des champs du form dans les attributs de l'entité (Employee)
 				emp.setNom(nom);
 				emp.setEmail(email);
-				System.out.println("test3");
 				emp.setPassword(pwd);
 				emp.setRole(role);
 				emp.setUsername(username);
-				System.out.println("username : " +emp.getUsername() + username);
 				emp.setPhoto(photo.getOriginalFilename());
 				
 				// Appelle de fonction d'ajout
 				empImp.saveEmp(emp);
-				System.out.println("test4");
 				// verification 
 				System.out.println("Ajout de l'employee : " +emp.getNom() + " dans la base de données."); 
 			}
-			
+			// @AdminController
 			return "redirect:/getEmp";
 		}
 }

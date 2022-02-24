@@ -7,12 +7,13 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestParam;
 
 import eco.dao.EmployeeImp;
+import eco.dao.ProduitImp;
 import eco.model.Employee;
+import eco.model.Produit;
 
 @Controller
 public class AdminController {
@@ -21,8 +22,12 @@ public class AdminController {
 	@Autowired
 	EmployeeImp empImp;
 	
-	// Variable static pour les dossiers photos (upload)
+	@Autowired
+	ProduitImp prdImp;
 	
+	// Variable static pour les dossiers photos (upload)
+	private static String empUpload = "src/main/resources/static/empUploads/";
+	private static String prdUpload = "src/main/resources/static/prdUploads/";
 	
 	////////////////
 	// Login Section
@@ -32,24 +37,26 @@ public class AdminController {
 	@RequestMapping("/admin")
 	public String accessToSignIn(
 			// récupération des valeurs de champ de form
-			@RequestAttribute(name = "username", required = false) String username,
-			@RequestAttribute(name = "email", required = false) String email,
-			@RequestAttribute(name = "password", required = false) String password,
+			@RequestParam(name = "username", required = false) String username,
+			@RequestParam(name = "email", required = false) String email,
+			@RequestParam(name = "password", required = false) String password,
 			Model m,
 			HttpSession s
 			) {
+		
 		
 		// verification identifiants rentrés si != msg d'erreur
 		// affichage du msgE
 		if(s.getAttribute("msgE") != null) {
 			m.addAttribute("msg", s.getAttribute("msgE"));
 		}
+		
 		// verification des valeurs 
 		if(email != null && password != null) {
-			System.out.println("test1");
+			
 			// super-admin condition
 			if(email.equals("admin2@gmail.com") && password.equals("admin2")) {
-				System.out.println("test2");
+				
 				// creation des attributs puis en enregistrement avec la session
 				m.addAttribute("username", username);
 				m.addAttribute("email", email);
@@ -57,33 +64,30 @@ public class AdminController {
 				s.setAttribute("role", "Super-admin");
 				s.setAttribute("username", username);
 				s.setAttribute("email", email);
-				System.out.println("test3");
 				// redirection vers le homeAdmin "admin/dashboard" si les conditions sont remplies
+				System.out.println("Creation d'attributs effectué, identifiants Super-admin reconnus, redirection version /homeAdmin");
 				return "redirect:/homeAdmin";
 				
-				// verif identifiants dans la bdd
+				// verif identifiants != de Super-admin dans la bdd
 			}else if(empImp.verifByEmail(email) != null) {
-				System.out.println("test4");
+				
+				// methode de recherche des identifiants dans la dbb
 				if(empImp.verifByEmail(email).getPassword().equals(password)) {
 					
-					System.out.println("test5");
+					
 					s.setAttribute("role", empImp.verifByEmail(email).getRole());
 					s.setAttribute("nom", empImp.verifByEmail(email).getNom());
 					// redirection vers le homeAdmin "admin/dashboard" si les conditions sont remplies
-					System.out.println("test6");
+					System.out.println("Creation d'attributs effectué, identifiants employee reconnus, redirection version /homeAdmin");
 					return "redirect:/homeAdmin";
 				} else {
-					System.out.println("test7");
+					System.out.println("Identifiants : " + email + " " + password + " non reconnus");
 					m.addAttribute("msg", "Username/Password incorrect");
 				}
 			} else {
-				System.out.println("test8");
 				s.setAttribute("msgE", null);
 			}
-			
-			// methode de recherche des identifiants dans la dbb
-		}
-		
+		}		
 		return "admin/signin";
 	}
 	
@@ -98,25 +102,25 @@ public class AdminController {
 		
 		// en cas de déconnexion, l'user est redirigé vers la page de login sinon
 		if(s.getAttribute("role") != null) {
-			System.out.println("test A");
+			
 			m.addAttribute("email", s.getAttribute("email"));
 			m.addAttribute("nom", s.getAttribute("nom"));
 			m.addAttribute("role", s.getAttribute("role"));
 			m.addAttribute("username", s.getAttribute("username"));
-			System.out.println("test B");
+			
 			return "admin/dashboard";
 		} else {
-			System.out.println("test C");
+			
 			s.setAttribute("msgE", "Veuillez vous connecter !");
-			System.out.println("test D");
+			
 			return "redirect:/admin";
 		}
 		
 	}
 	
-	////////////////////
-	// Employee section
-	////////////////////
+	/////////////////////////////////////////////////////
+	// Employee, Client, Commande, Produit liste section
+	/////////////////////////////////////////////////////
 	
 	// listEmp
 	@RequestMapping("/getEmp")
@@ -130,17 +134,51 @@ public class AdminController {
 		
 		// condition d'affichage liste selon role
 		if(s.getAttribute("role")!= "Super-Admin") {
-			m.addAttribute("msgEmp", "Vous n'avez pas les priviligès pour cette requete");
+			m.addAttribute("msgE", "Vous n'avez pas les priviligès pour cette requete");
 		}
 		
 		// creation d'attributs pour l'affichage
 		m.addAttribute("emp", listEmp);
-		m.addAttribute("empR", s.getAttribute("role"));
-		m.addAttribute("msgEmp", null);
+		m.addAttribute("role", s.getAttribute("role"));
+		m.addAttribute("msgE", null);
 		
 		// Verification du retour de la collection
 		System.out.println("Il y a " + listEmp.size() + " employees dans la base de données");
 		
 		return "redirect:/admin";
 	}
+	
+	// listPrd
+	@RequestMapping("/getPrd")
+	public String getPrdList(
+			Model m,
+			HttpSession s
+			) {
+		// pour l'affichage des produits
+		List<Produit> listPrd = (List<Produit>)prdImp.getPrd();
+		
+		// creation d'attributs pour l'affichage
+		m.addAttribute("emp", listPrd);
+		m.addAttribute("role", s.getAttribute("role"));
+		m.addAttribute("msgE", null);
+		
+		// Verification du retour de la collection
+		System.out.println("Il y a " + listPrd.size() + " employees dans la base de données");
+				
+		return "redirect:/admin";
+	}
+	
+	
+	/////////////////////////////////////////////////////
+	// Employee, Client, Commande, Produit update section
+	/////////////////////////////////////////////////////
+	
+	// update emp 
+	
+	
+	/////////////////////////////////////////////////////
+	// Employee, Client, Commande, Produit delete section
+	/////////////////////////////////////////////////////
+	
+	// delete emp
 }

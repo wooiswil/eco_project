@@ -1,0 +1,159 @@
+<!doctype html>
+<html class="fixed" lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+	<!-- Basic -->
+	<meta charset="UTF-8">
+
+	<meta name="keywords" content="HTML5 Admin Template" />
+	<meta name="description" content="Porto Admin - Responsive HTML5 Template">
+	<meta name="author" content="okler.net">
+
+	<!-- Mobile Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+	<!-- Web Fonts  -->
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light"
+		rel="stylesheet" type="text/css">
+
+	<!-- Vendor CSS -->
+	<link rel="stylesheet" href="/adminAssets/assets/vendor/bootstrap/css/bootstrap.css" />
+	<link rel="stylesheet" href="/adminAssets/assets/vendor/font-awesome/css/font-awesome.css" />
+	<link rel="stylesheet" href="/adminAssets/assets/vendor/magnific-popup/magnific-popup.css" />
+	<link rel="stylesheet" href="/adminAssets/assets/vendor/bootstrap-datepicker/css/datepicker3.css" />
+
+	<!-- Theme CSS -->
+	<link rel="stylesheet" href="/adminAssets/assets/stylesheets/theme.css" />
+
+	<!-- Skin CSS -->
+	<link rel="stylesheet" href="/adminAssets/assets/stylesheets/skins/default.css" />
+
+	<!-- Theme Custom CSS -->
+	<link rel="stylesheet" href="/adminAssets/assets/stylesheets/theme-custom.css">
+
+	<!-- Head Libs -->
+	<script src="/adminAssets/assets/vendor/modernizr/modernizr.js"></script>
+
+</head>
+
+<body>
+	<!-- start: page -->
+	<section class="body-sign">
+		<div class="center-sign">
+			<a href="/" class="logo pull-left">
+				<img src="/adminAssets/assets/images/logo.png" height="54" alt="Porto Admin" />
+			</a>
+
+			<div class="panel panel-sign">
+				<div class="panel-title-sign mt-xl text-right">
+					<h2 class="title text-uppercase text-bold m-none"><i class="fa fa-user mr-xs"></i> Ajout produits</h2>
+				</div>
+				<div class="panel-body">
+				<div class="alert alert-danger" role="alert" th:if="${msg}" th:utext="${msg}">
+				</div>
+				<div class="alert alert-success" role="alert" th:if="${Mess}" th:utext="${Mess}">
+				</div>
+					<form th:action="@{/Produit/addPrd}" method="post" enctype="multipart/form-data"> 
+						<div class="form-group mb-lg">
+							<label>Reference Produit</label>
+							<input name="ref" type="text" class="form-control input-lg" placeholder="SKU-***" th:value="${refPrd}" >
+						</div>
+						
+						<div class="form-group mb-lg">
+							<label>Nom Produit</label>
+							<input name="nom" type="text" class="form-control input-lg" th:value="${nomPrd}" >
+						</div>
+
+						<div class="form-group mb-lg">
+							<label>Prix unitaire (HT) </label>
+							<input name="prix" type="text" class="form-control input-lg"  >
+						</div>
+
+						<div class="form-group mb-lg">
+							<label for="role" class="form-control input-lg">Genre</label>
+							<select class="form-control form-control-user" id="role" required name="genre">
+								<option selected disabled value="">Choisir la catégorie ...</option>
+								<option value="Accessories">Accessories</option>
+								<option value="Clothing">Clothing</option>
+								<option value="Sneakers">Sneakers</option>
+								<option value="Streetwear">Streetwear</option>
+							</select>
+						</div>
+
+						<div class="form-group mb-lg">
+							<label>Image</label>
+							<input type="file" class="form-control form-control-user" id="photo" name="photo">
+						</div>
+
+						<div class="form-group mb-lg">
+							<label>Quantité </label>
+							<input name="qte" type="text" class="form-control input-lg" >
+						</div>
+						
+						<div class="form-group mb-lg">
+							<label>Couleur </label>
+							<input name="couleur" type="text" class="form-control input-lg" >
+						</div>
+						
+						<div class="form-group mb-lg">
+							<label>Poids</label>
+							<input name="poids" type="text" class="form-control input-lg" >
+						</div>
+						
+						<div class="form-group mb-lg">
+							<label>Infos article </label>
+							<textarea rows="5" cols="15" name="info" class="form-control input-lg"></textarea>
+						</div>
+
+						<div class="row">
+							<div class="col-sm-8">
+								<div class="checkbox-custom checkbox-default">
+									<input id="AgreeTerms" name="agreeterms" type="checkbox" >
+									<label for="AgreeTerms">I agree with <a href="#">terms of use</a></label>
+								</div>
+							</div>
+							<div class="col-sm-4 text-right">
+								
+							</div>
+						</div>
+
+						<span class="mt-lg mb-lg line-thru text-center text-uppercase">
+							<span>or</span>
+						</span>
+
+						<div class="mb-xs text-center">
+							<button class="btn btn-muted mb-md ml-xs mr-xs">Annuler</button>
+							<button type="submit" class="btn btn-primary mb-md ml-xs mr-xs">Ajouter Produit</button>
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<p class="text-center text-muted mt-md mb-md">&copy; Copyright 2018. All rights reserved. Template by <a
+					href="https://colorlib.com">Colorlib</a>.</p>
+		</div>
+	</section>
+	<!-- end: page -->
+
+	<!-- Vendor -->
+	<script src="/adminAssets/assets/vendor/jquery/jquery.js"></script>
+	<script src="/adminAssets/assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
+	<script src="/adminAssets/assets/vendor/bootstrap/js/bootstrap.js"></script>
+	<script src="/adminAssets/assets/vendor/nanoscroller/nanoscroller.js"></script>
+	<script src="/adminAssets/assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+	<script src="/adminAssets/assets/vendor/magnific-popup/magnific-popup.js"></script>
+	<script src="/adminAssets/assets/vendor/jquery-placeholder/jquery.placeholder.js"></script>
+
+	<!-- Theme Base, Components and Settings -->
+	<script src="/adminAssets/assets/javascripts/theme.js"></script>
+
+	<!-- Theme Custom -->
+	<script src="/adminAssets/assets/javascripts/theme.custom.js"></script>
+
+	<!-- Theme Initialization Files -->
+	<script src="/adminAssets/assets/javascripts/theme.init.js"></script>
+
+</body>
+
+</html>
